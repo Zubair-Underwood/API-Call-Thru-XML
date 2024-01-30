@@ -1,25 +1,20 @@
 const postsListContainer = document.querySelector(".posts-list-container");
 
-// fetch using XHR
+function fetchUsingFetchMethod() {
 
-function fetchUsingXHR() {
+    const fetchRequest = fetch("https://jsonplaceholder.typicode.com/posts", {
 
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://jsonplaceholder.typicode.com/posts");
-    xhr.responseType = "json";
-    xhr.send();
+        method: "GET",
 
-    xhr.onload = () => {
+    });
 
-        if (xhr.status === 200) {
-            displayResults(xhr.response);
+    fetchRequest
+        .then((response) => response.json())
+        .then((result) => displayResults(result))
+        .catch((e) => console.log(e));
 
-        } else {
-
-            console.log("Some Error Ocurred");
-        }
-    };
 }
+
 
 function displayResults(posts) {
 
@@ -31,5 +26,5 @@ function displayResults(posts) {
     `).join(" ");
 }
 
-fetchUsingXHR();
+fetchUsingFetchMethod();
 
